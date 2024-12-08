@@ -90,7 +90,7 @@ def configure_collider(full_configuration):
 
     # Update BBCW optics (alignment and sigmas)
     bbcwtools = BBCWInstaller(xc.ver_hllhc_optics, xc.ver_lhc_run)
-    bbcwtools.update_optics_bbcw(collider,_with_checks = True)
+    bbcwtools.update_optics_bbcw(collider,_with_checks = False)
 
     # Record beta functions in the configuration
     xc.record_beta_functions(collider)
@@ -100,7 +100,7 @@ def configure_collider(full_configuration):
         xc.configure_beam_beam(collider)
 
     # Power the bbcw
-    bbcwtools.power_bbcw(collider, config_collider)
+    bbcwtools.power_bbcw(collider, config_collider,_with_checks = True)
 
     # Update configuration with luminosity now that bb is known
     l_n_collisions = [
@@ -219,8 +219,8 @@ if __name__ == "__main__":
     collider_original_1 = collider.copy()
     collider_original_2 = collider.copy()
 
-    # # Track particles and save to disk
-    # track_particles(full_configuration, collider, fingerprint)
+    # Track particles and save to disk
+    track_particles(full_configuration, collider, fingerprint)
 
     # Compute the residuals and save to disk
     compute_residual(config_file        = path_root_study + '/config_2_nlr.yaml', 

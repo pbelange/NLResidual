@@ -40,10 +40,8 @@ fi
 git clone --recurse-submodules https://github.com/pbelange/study-DA.git ./study-DA
 pip install -e ./study-DA
 
-
 git clone https://github.com/pbelange/nafflib.git ./Executables/$ENV_NAME/nafflib
 pip install -e ./Executables/$ENV_NAME/nafflib
-
 
 git clone https://github.com/xsuite/xobjects ./Executables/$ENV_NAME/xobjects
 pip install -e ./Executables/$ENV_NAME/xobjects
@@ -57,21 +55,19 @@ pip install -e ./Executables/$ENV_NAME/xpart
 git clone https://github.com/xsuite/xtrack ./Executables/$ENV_NAME/xtrack
 pip install -e ./Executables/$ENV_NAME/xtrack
 
-git clone https://github.com/xsuite/xmask ./Executables/$ENV_NAME/xmask
+# xmask ----
+git clone --recurse-submodules https://github.com/xsuite/xmask ./Executables/$ENV_NAME/xmask
 pip install -e ./Executables/$ENV_NAME/xmask
+#-----------
 
 git clone https://github.com/xsuite/xfields ./Executables/$ENV_NAME/xfields
 pip install -e ./Executables/$ENV_NAME/xfields
 
-
-# Download outsourced files
-#=========================================
-cd ./Executables/$ENV_NAME/xmask
-git config --global --add safe.directory ./
-git submodule init
-git submodule update
-
 git clone https://github.com/xsuite/xsuite ./Executables/$ENV_NAME/xsuite
-pip install -e ./Executables/$ENV_NAME/xsuite
+pip install -e ./Executables/$ENV_NAME/xsuite --no-deps
+
+
+# Prebuild xsuite kernels
+#=========================================
 xsuite-prebuild regenerate
 
